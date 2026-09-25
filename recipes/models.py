@@ -1,0 +1,39 @@
+from django.db import models
+
+class Recipe(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='recipe_images/')
+    description = models.TextField()
+    calories = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Ingredient(models.Model):
+
+    class Unit(models.TextChoices):
+        PIECES = 'pcs', 'Pieces'
+        MILLIGRAMS = 'mg', 'Milligrams'
+        GRAMS = 'g', 'Grams'
+        KILOGRAMS = 'kg', 'Kilograms'
+        OUNCES = 'oz', 'Ounces'
+        POUNDS = 'lb', 'Pounds'
+        MILLILITERS = 'ml', 'Milliliters'
+        LITERS = 'l', 'Liters'
+        TEASPOONS = 'tsp', 'Teaspoons'
+        TABLESPOONS = 'tbsp', 'Tablespoons'
+        CUPS = 'cup', 'Cups'
+        PINTS = 'pt', 'Pints'
+        QUARTS = 'qt', 'Quarts'
+        GALLONS = 'gal', 'Gallons'
+
+    name = models.OneToOneField(Product, on_delete=models.CASCADE)
+    amount = models.IntegerField()
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+    unit = models.CharField(max_length=50, choices=Unit.choices, default=Unit.PIECES)
