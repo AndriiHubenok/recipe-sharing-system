@@ -33,7 +33,7 @@ class Ingredient(models.Model):
         QUARTS = 'qt', 'Quarts'
         GALLONS = 'gal', 'Gallons'
 
-    name = models.OneToOneField(Product, on_delete=models.CASCADE)
-    amount = models.IntegerField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+    amount = models.IntegerField()
     unit = models.CharField(max_length=50, choices=Unit.choices, default=Unit.PIECES)

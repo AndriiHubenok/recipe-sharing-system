@@ -10,8 +10,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Ingredient)
 class IngredientAdmin(admin.ModelAdmin):
-    list_display = ('name', 'amount', 'unit',)
-    search_fields = ('name',)
+    list_display = ('product', 'amount', 'unit',)
+    search_fields = ('product',)
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
