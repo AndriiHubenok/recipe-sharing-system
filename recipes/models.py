@@ -1,6 +1,7 @@
 from django.db import models
 
 class Recipe(models.Model):
+
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='recipe_images/')
     description = models.TextField()
@@ -12,6 +13,7 @@ class Recipe(models.Model):
         return self.title
 
 class Product(models.Model):
+
     name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)

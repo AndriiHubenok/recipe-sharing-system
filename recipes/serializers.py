@@ -3,6 +3,7 @@ from rest_framework import serializers
 from recipes.models import Recipe, Product, Ingredient
 
 class ProductSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Product
         fields = '__all__'
